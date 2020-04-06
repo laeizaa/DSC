@@ -1,4 +1,4 @@
-﻿{
+{
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
@@ -16,6 +16,7 @@
     },
     "domainName": {
       "type": "string",
+      "defaultValue": "ramboeck.loc"
       "metadata": {
         "description": "The FQDN of the Active Directory Domain to be created"
       }
@@ -28,7 +29,7 @@
     },
     "vmSize": {
       "type": "string",
-      "defaultValue": "Standard_D2s_v3",
+      "defaultValue": "Standard_B1ms",
       "metadata": {
         "description": "Size of the VM for the controller"
       }
@@ -56,21 +57,21 @@
     },
     "virtualMachineName": {
       "type": "string",
-      "defaultValue": "adVM",
+      "defaultValue": "AZDC01",
       "metadata": {
         "description": "Virtual machine name."
       }
     },
     "virtualNetworkName": {
       "type": "string",
-      "defaultValue": "adVNET",
+      "defaultValue": "Azure-VNET01",
       "metadata": {
         "description": "Virtual network name."
       }
     },
     "virtualNetworkAddressRange": {
       "type": "string",
-      "defaultValue": "10.0.0.0/16",
+      "defaultValue": "10.128.0.0/16",
       "metadata": {
         "description": "Virtual network address range."
       }
@@ -98,28 +99,28 @@
     },
     "networkInterfaceName": {
       "type": "string",
-      "defaultValue": "adNic",
+      "defaultValue": "AZDC01-NIC01",
       "metadata": {
         "description": "Network interface name."
       }
     },
     "privateIPAddress": {
       "type": "string",
-      "defaultValue": "10.0.0.4",
+      "defaultValue": "10.128.0.4",
       "metadata": {
         "description": "Private IP address."
       }
     },
     "subnetName": {
       "type": "string",
-      "defaultValue": "adSubnet",
+      "defaultValue": "AD-Subnet",
       "metadata": {
         "description": "Subnet name."
       }
     },
     "subnetRange": {
       "type": "string",
-      "defaultValue": "10.0.0.0/24",
+      "defaultValue": "10.128.0.0/24",
       "metadata": {
         "description": "Subnet IP range."
       }
@@ -133,14 +134,14 @@
     },
     "availabilitySetName": {
       "type": "string",
-      "defaultValue": "adAvailabiltySet",
+      "defaultValue": "ADAvailabiltySet",
       "metadata": {
         "description": "Availability set name."
       }
     },
     "loadBalancerName": {
       "type": "string",
-      "defaultValue": "adLoadBalancer",
+      "defaultValue": "ADLoadBalancer",
       "metadata": {
         "description": "Load balancer name."
       }
@@ -301,7 +302,7 @@
           "imageReference": {
             "publisher": "MicrosoftWindowsServer",
             "offer": "WindowsServer",
-            "sku": "2016-Datacenter",
+            "sku": "2019-Datacenter",
             "version": "latest"
           },
           "osDisk": {
@@ -309,7 +310,7 @@
             "caching": "ReadOnly",
             "createOption": "FromImage",
             "managedDisk": {
-              "storageAccountType": "StandardSSD_LRS"
+              "storageAccountType": "StandardHDD_LRS"
             }
           },
           "dataDisks": [
@@ -319,7 +320,7 @@
               "createOption": "Empty",
               "diskSizeGB": 20,
               "managedDisk": {
-                "storageAccountType": "StandardSSD_LRS"
+                "storageAccountType": "StandardHDD_LRS"
               },
               "lun": 0
             }
