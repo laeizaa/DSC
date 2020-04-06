@@ -16,7 +16,7 @@
     },
     "domainName": {
       "type": "string",
-      "defaultValue": "ramboeck.loc"
+      "defaultValue": "ramboeck.loc",
       "metadata": {
         "description": "The FQDN of the Active Directory Domain to be created"
       }
